@@ -1,0 +1,10 @@
+# Mac OS X Leopard and later should have sqlit3 installed by default (I hope)
+
+# Ubuntu, install sqlite3 from the shell:
+sudo apt-get install sqlite3
+
+# Create an empty database from the shell:
+sqlite3 rpkm.db
+.tables
+.exit
+

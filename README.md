@@ -1,4 +1,4 @@
 PythonCourse
 ============
 
-Python with SQLite
+Python with SQLite. Sample data and scripts.

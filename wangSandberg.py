@@ -7,7 +7,8 @@ import numpy as np
 # Create a connection to the database
 con = lite.connect('rpkm.db')
 
-# cur is a "cursor" object that can be used to traverse the records from the result, the curser is bound to a connection
+# cur is a "cursor" object that can be used to traverse the records from the result,
+# the curser is bound to a connection
 cur = con.cursor() 
 
 # Get the database version
@@ -71,9 +72,10 @@ for row in reader:
     sSql = """insert into wangsandberg (gene_name, ensg, uhrlowcov, brainlowcov, adipose, brain, breast,
     colon, heart, liver, lymphnode, skelmuscle, testes, cerebellum1, cerebellum2, cerebellum3, cerebellum4,
     cerebellum5, cerebellum6, mcf7, bt474, hme, mb435, t47d) values
-    ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-    """ % (row[23], row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-    row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22])
+    ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
+    '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (row[23], row[0], row[1], row[2], row[3], row[4], row[5],
+    row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17],
+    row[18], row[19], row[20], row[21], row[22])
     slask = cur.execute(sSql)
     iCount += 1
 
@@ -93,7 +95,8 @@ print len(rows)
 print rows[0][0]
 
 cur.execute('select * from wangsandberg where brain > 10 order by brain desc' )
-# Sort the table on the highest rpkm value for the brain tissue, require that the rpkm in brain should be more than 10
+# Sort the table on the highest rpkm value for the brain tissue, require that the
+# rpkm in brain should be more than 10
 rows = cur.fetchall()
 print len(rows)
 print rows[0]
@@ -142,7 +145,7 @@ lenOfRow = len(rows[0])
 for row in rows:         # This loop will calculate normalized values and insert the new data into the new columns we created
     iCount += 1
     if (iCount % 100) == 0:
-        # Commit everey 500 insert to spare the redo log
+        # Commit everey 100 insert to spare the redo log
         con.commit()
         print iCount
     fMax = np.asarray(row[1:lenOfRow]).max()      # higest rpkm value for this gene
@@ -151,7 +154,6 @@ for row in rows:         # This loop will calculate normalized values and insert
         continue
     row2 = [float(x) for x in row[1:lenOfRow]]  # copy the values for this gene
     row2 /= fMax     # Divide all values with highest
-
     # Update the database with the normalized values
     sSql = """update wangsandberg set uhrlowcov_rel='%s', brainlowcov_rel='%s', adipose_rel='%s', brain_rel='%s', breast_rel='%s',
     colon_rel='%s', heart_rel='%s', liver_rel='%s', lymphnode_rel='%s', skelmuscle_rel='%s', testes_rel='%s', cerebellum1_rel='%s',

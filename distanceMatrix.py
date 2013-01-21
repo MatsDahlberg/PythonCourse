@@ -9,8 +9,12 @@ cur = con.cursor()
 
 sSql = "delete from expression_distance"
 # Clear old data
-cur.execute(sSql)
-con.commit()
+try:
+    cur.execute(sSql)
+    con.commit()
+except:
+    pass # If this fails it means it is the first time we run the script, ie, errors are ok :)
+
 
 # Create a new table the will contain the full distance matrix
 try:
@@ -45,7 +49,7 @@ sample22, rpkm_gene1, rpkm_gene2, ..., rpkm_gene23115
 D = scipy.zeros([iNrOfSamples, iNrOfGenes])   # Initilize to all zeros
 for sample in range(iNrOfSamples):
     for gene in range(iNrOfGenes):
-        if rows[gene][sample] is None or np.isnan(float(rows[gene][sample])):  # Ugly but I know no other means!
+        if rows[gene][sample] is None or np.isnan(float(rows[gene][sample])):
             D[sample][gene] = 0
         else:
             D[sample][gene] = rows[gene][sample]

@@ -5,6 +5,14 @@ import numpy as np
 import scipy
 
 
+# Please note, before you can run the code below you need to create a database from
+# the shell command-line. To create a new empty database named "rpkm.db" run the following:
+"""
+sqlite3 rpkm.db
+.tables
+.exit
+"""
+
 # Create a connection to the database
 con = lite.connect('rpkm.db')
 

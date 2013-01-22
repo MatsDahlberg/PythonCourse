@@ -118,11 +118,12 @@ cur.execute('select * from wangsandberg where brain > 10 order by brain desc' )
 # Select the rows with rpkm > 10 for brain and sort the result with higest brain rpkm at the top
 
 rows = cur.fetchall()
+iNrOfColumns = len(rows[0])
 print len(rows)
 print rows[0]
-print np.asarray(rows[0][2:len(rows[0])]).max()
-print np.asarray(rows[0][2:len(rows[0])]).mean()
-print np.asarray(rows[0][2:len(rows[0])]).min()
+print np.asarray(rows[0][2:iNrOfColumns]).max()
+print np.asarray(rows[0][2:iNrOfColumns]).mean()
+print np.asarray(rows[0][2:iNrOfColumns]).min()
 
 
 # Create a new column for each tissue type
@@ -175,7 +176,7 @@ for row in rows:
         # If there are no values for the gene, then we skip it and take the next one
         continue
     row2 = [float(x) for x in row[1:lenOfRow]]  # copy the values for this gene
-    row2 /= fMax     # Divide all values with highest
+    row2 /= fMax     # Divide all values with highest, row2 is now normalized
     # Update the database with the normalized values
     sSql = """update wangsandberg set uhrlowcov_rel='%s', brainlowcov_rel='%s', adipose_rel='%s', brain_rel='%s',
     breast_rel='%s', colon_rel='%s', heart_rel='%s', liver_rel='%s', lymphnode_rel='%s', skelmuscle_rel='%s',

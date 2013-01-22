@@ -3,6 +3,16 @@ import sys
 import csv
 import numpy as np
 import scipy
+"""
+This script will use a file containing RNA-RPKM (Reads Per Kilobase per Million mapped reads)
+values for 22 different human tissues. Each tissue have measurement of the RNA-transcript
+levels for 23115 ensg IDs (gene identifiers).
+
+The script will normalize the values across the samples for each and every gene and finally
+a CSV file with 22 rows (one for each tissue) and 23115 columns (one for each gene).
+
+So the output of the script is a normalized RNA transcript vector for each sample (tissue).
+"""
 
 
 # Please note, before you can run the code below you need to create a database from
@@ -201,14 +211,17 @@ iNrOfGenes = len(rows)
 sSamples = "uhrlowcov_rel,brainlowcov_rel,adipose_rel,brain_rel,breast_rel,colon_rel,heart_rel,liver_rel,lymphnode_rel,skelmuscle_rel,testes_rel,cerebellum1_rel,cerebellum2_rel,cerebellum3_rel,cerebellum4_rel,cerebellum5_rel,cerebellum6_rel,mcf7_rel,bt474_rel,hme_rel,mb435_rel,t47d_rel"
 arraySamples = sSamples.split(',')
 iNrOfSamples = len(arraySamples)
+# Create a matrix with as amny reows as we have samples (22) and as many columns as we have ensg (23115)
 D = scipy.zeros([iNrOfSamples, iNrOfGenes])
 
+# These 2 loops just populates the  D matrix with the all the values that we got from the database
 for i in range(iNrOfSamples):
     for j in range(iNrOfGenes):
         D[i, j] = rows[j][i]
 
 
 with open('normalizedRPKM.csv', 'wb') as outputFile:
+    # For each sample we construct a row of ';' separated values (23115, one for each ensg)
     for i in range(iNrOfSamples):
         sTmpStr = []
         sTmpStr.append([str(x) for x in D[i]])

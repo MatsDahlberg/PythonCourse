@@ -1,7 +1,8 @@
 PythonCourse - SQLite
 =====================
-
 Python with SQLite. Sample data and scripts.
+
+
 
 shell_commands.txt - Commands to install sqlite3 and how to create an empty db
 

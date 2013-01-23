@@ -190,7 +190,7 @@ iNrOfGenes = len(rows)
 sSamples = "uhrlowcov_rel,brainlowcov_rel,adipose_rel,brain_rel,breast_rel,colon_rel,heart_rel,liver_rel,lymphnode_rel,skelmuscle_rel,testes_rel,cerebellum1_rel,cerebellum2_rel,cerebellum3_rel,cerebellum4_rel,cerebellum5_rel,cerebellum6_rel,mcf7_rel,bt474_rel,hme_rel,mb435_rel,t47d_rel"
 arraySamples = sSamples.split(',')
 iNrOfSamples = len(arraySamples)
-# Create a matrix with as amny reows as we have samples (22) and as many columns as we have ensg (23115)
+# Create a matrix with as many rows as we have samples (22) and as many columns as we have ensg (23115)
 D = scipy.zeros([iNrOfSamples, iNrOfGenes])
 
 # These 2 loops just populates the D matrix with the all the values that we got from the database

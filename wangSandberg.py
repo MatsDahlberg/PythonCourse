@@ -109,25 +109,6 @@ con.commit()
 cur.execute('CREATE UNIQUE INDEX ensg_unique ON wangsandberg (ensg ASC)')
 
 
-# Some sample queries
-cur.execute('select gene_name, ensg from wangsandberg order by ensg')
-# Get all the gene symbols and the ensg numbers
-rows = cur.fetchall()
-print len(rows)
-print rows[0][0]
-
-cur.execute('select * from wangsandberg where brain > 10 order by brain desc' )
-# Select the rows with rpkm > 10 for brain and sort the result with higest brain rpkm at the top
-
-rows = cur.fetchall()
-iNrOfColumns = len(rows[0])
-print len(rows)
-print rows[0]
-print np.asarray(rows[0][2:iNrOfColumns]).max()
-print np.asarray(rows[0][2:iNrOfColumns]).mean()
-print np.asarray(rows[0][2:iNrOfColumns]).min()
-
-
 # Create a new column for each tissue type
 cur.execute("alter table wangsandberg add column uhrlowcov_rel REAL")
 cur.execute("alter table wangsandberg add column brainlowcov_rel REAL")

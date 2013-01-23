@@ -41,10 +41,12 @@ print "SQLite version: %s" % data
 
 
 """This is what the 2 first lines of the "raw data"  (the file WangSandberg.rpkm.txt) looks like:
+
 Gene            UHRLowcov	brainLowcov	adipose	brain	breast	colon	heart	liver	lymphNode	skelMuscle	testes	cerebellum1	cerebellum2	cerebellum3	cerebellum4	cerebellum5	cerebellum6	MCF7	BT474	HME	MB435	T47D	Symbol	Description
 ENSG00000000003	18.51	        1.33	        5.91	2.41	4.25	3.90	2.51	17.43	1.40	        0.51	        8.95	0.58	        0.33	        0.35	        0.36	        0.33	        0.44	        7.25	0.81	3.09	5.02	3.00	TSPAN6	transmembrane 4 superfamily member 6
- ... 23115 times
+
 0               1               2               3       4       5       6       7       8       9               10              11      12              13              14              15              16              17              18      19      20      21      22      23      24
+23115 lines
 """
 # Creat a table that looks as your data ( I am skipping the description column)
 cur.execute("""CREATE TABLE wangsandberg (

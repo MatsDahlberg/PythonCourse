@@ -15,3 +15,4 @@ corr_heatmap.pdf - PDF showing the result of creating a heatmap in R from the ex
 
 distanceMatrix.py - Creates a new table with the Euclidian distance between all samples. Uses the table created by wangSandberg.py
 
+sampleSql.py - Some sample sql-queries

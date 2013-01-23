@@ -1,5 +1,4 @@
 import sqlite3 as lite
-import sys
 import csv
 import numpy as np
 import scipy
@@ -173,11 +172,6 @@ for row in rows:
 con.commit()
 
 
-cur.execute('select gene_name, ensg, liver, liver_rel from wangsandberg where liver_rel=1 order by liver desc')
-# Get all the genes that have the higest expression in the liver tissue
-rows = cur.fetchall()
-print len(rows)
-print rows[0]
 
 
 # Export the normalized values to a text file
